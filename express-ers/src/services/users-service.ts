@@ -4,10 +4,10 @@ import User from 'models/User';
 // Function used to get all the users and their info from the database 
 export async function getAllUsers(roleId:number) {
     // It's known from the database that the authorized roles for this process
-    // are finance and manager (roleId 2 or 3)
+    // are finance, manager or admin (roleId 2, 3 or 4)
     // The distinction between query result error and access permission error is handled
     // separately
-    if ((roleId === 2) || (roleId === 3)) { // Access accepted
+    if ((roleId===2) || (roleId===3) || (roleId===4)) { // Access accepted
         // Try-catch block to handle any server error
         try {
             const allUsers = await dbConnect.query(
@@ -33,7 +33,7 @@ export async function getUserById(id:number,roleId:number) {
     // Check if current user is whether finance or manager
     // The distinction between query result error and access permission error is handled
     // separately
-    if ( ( roleId===2 ) || ( roleId===3 ) ) { // Access accepted
+    if ( (roleId===2) || (roleId===3) || (roleId===4) ) { // Access accepted
         try {
             const user = await dbConnect.query(
             `select "userId","firstName", "lastName", email,
