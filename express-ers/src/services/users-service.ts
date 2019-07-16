@@ -8,7 +8,8 @@ export async function getAllUsers(roleId:number) {
     // The distinction between query result error and access permission error is handled
     // separately
     if ((roleId===2) || (roleId===3) || (roleId===4)) { // Access accepted
-        // Try-catch block to handle any server error
+        // Try-catch block to handle any server error and prevent 
+        // application from blocking
         try {
             const allUsers = await dbConnect.query(
             `select "userId","firstName", "lastName", email,
@@ -29,11 +30,14 @@ export async function getAllUsers(roleId:number) {
 }
 
 // Function used to get a specific user from the database given his/her id
-export async function getUserById(id:number,roleId:number) {
-    // Check if current user is whether finance or manager
+export async function getUserById(id:number,token) {
+    // Check if current user is whether finance, manager, admin 
+    // or the user with same searched id
     // The distinction between query result error and access permission error is handled
-    // separately
-    if ( (roleId===2) || (roleId===3) || (roleId===4) ) { // Access accepted
+    // separately handled
+    if ( (parseInt(token.role)===2)  || (parseInt(token.role)===3) || 
+         (parseInt(token.role)===4) || (parseInt(token.id)===id) )
+         { // Access accepted
         try {
             const user = await dbConnect.query(
             `select "userId","firstName", "lastName", email,

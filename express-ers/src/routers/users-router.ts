@@ -35,7 +35,7 @@ usersRouter.get('/:id',async (request:any,response:Response)=>{
     const id = parseInt(request.params.id);
     // Send query to database
     // The current  user's role is provided in order to check access permission
-    const user = await userServices.getUserById(id,parseInt(request.token.role));
+    const user = await userServices.getUserById(id,request.token);
     if (user) { // Access accepted
         if (user.length === 0) { // No users found with given id
             response.sendStatus(404);
