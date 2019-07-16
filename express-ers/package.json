@@ -1,0 +1,24 @@
+{
+  "name": "express-ers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/Main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.0",
+    "@types/node": "^12.6.2",
+    "@types/pg": "^7.4.14",
+    "body": "^5.1.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "jsonwebtoken": "^8.5.1",
+    "parser": "^0.1.4",
+    "pg": "^7.11.0"
+  }
+}
