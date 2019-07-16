@@ -4,7 +4,7 @@ import dBConnection from '../util/DB-cred';
 // Return reimbursement(s) with given statusId
 export async function getReimbByStatusId(id:number,roleId:number) {
     // Check if current signed in user has permission to access this info
-    if ( (roleId===2)||(roleId===3) ) { // Access accepted
+    if ( (roleId===2)||(roleId===3)||(roleId===4) ) { // Access accepted
         try {
             const result = await dBConnection.query(`select * 
             from public."Reimbursement" where status = $1`,[id]);
@@ -24,7 +24,7 @@ export async function getReimbByStatusId(id:number,roleId:number) {
 // Return reimbursement(s) with given authorId
 export async function getReimbByAuthorId(id:number,roleId:number) {
     // Check if current signed in user has permission to access this info
-    if ( (roleId===2)||(roleId===3) ) { // Access accepted
+    if ( (roleId===2)||(roleId===3)||(roleId===4) ) { // Access accepted
         try {
             const result = await dBConnection.query(`select * 
             from public."Reimbursement" where author = $1`,[id]);
@@ -45,7 +45,7 @@ export async function getReimbByAuthorId(id:number,roleId:number) {
 // Function to create a new reimbursement
 export async function createNewReimbursement(reimbursement:Reimbursement,roleId:number) {
     // Check if current signed in user has permission to access this info
-    if ( (roleId===2)||(roleId===3) ) { // Access accepted
+    if ( (roleId===2)||(roleId===3)||(roleId===4) ) { // Access accepted
         try {
             const newReimbursement = await dBConnection.query(`insert into public."Reimbursement" 
             (author,amount,description,resolver,status,type,dateresolved,datesubmitted)
@@ -72,7 +72,7 @@ export async function createNewReimbursement(reimbursement:Reimbursement,roleId:
 // Function to update a reimbursement
 export async function modifyReimbursement(reimbInfo:Reimbursement,roleId:number) {
     // Check if current signed in user has permission to access this info
-    if ( (roleId===2)||(roleId===3) ) { // Access accepted
+    if ( (roleId===2)||(roleId===3)||(roleId===4) ) { // Access accepted
         try {
             // Update information query. Non-modified fields remain untouched by using
             // coalesce function
