@@ -62,9 +62,10 @@ reimbRouter.post('',async (request:any,response:Response) => {
 reimbRouter.patch('',async (request:any,response:Response) => {
     // Retrieve information from the request body
     const reimbInfo : Reimbursement = request.body;
-    // Retrieve current user role
+    // Retrieve current user id and roleId
+    const currUser:number = parseInt(request.token.id);
     const roleId : number = parseInt(request.token.role);
-    const modifiedReimb = await reimbService.modifyReimbursement(reimbInfo,roleId);
+    const modifiedReimb = await reimbService.modifyReimbursement(reimbInfo,currUser,roleId);
     if (modifiedReimb) { // Access accepted
         if (modifiedReimb.length === 0) {
             response.sendStatus(400); // Could not create

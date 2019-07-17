@@ -70,8 +70,10 @@ export async function createNewReimbursement(reimbursement:Reimbursement,roleId:
 }
 
 // Function to update a reimbursement
-export async function modifyReimbursement(reimbInfo:Reimbursement,roleId:number) {
+export async function modifyReimbursement(reimbInfo:Reimbursement,resolvId:number,roleId:number) {
     // Check if current signed in user has permission to access this info
+    // Current user, if allowed to modify any reimbursement, is assigned as the
+    // resolver of the reimbursement
     if ( (roleId===2)||(roleId===3)||(roleId===4) ) { // Access accepted
         try {
             // Update information query. Non-modified fields remain untouched by using
@@ -83,7 +85,7 @@ export async function modifyReimbursement(reimbInfo:Reimbursement,roleId:number)
             dateresolved=coalesce($7,dateresolved),datesubmitted=coalesce($8,datesubmitted)
             where id=$9 
             returning id,author,amount,description,resolver,status,type,dateresolved,datesubmitted`,
-            [reimbInfo.author,reimbInfo.amount,reimbInfo.description,reimbInfo.resolver,
+            [reimbInfo.author,reimbInfo.amount,reimbInfo.description,resolvId,
             reimbInfo.status,reimbInfo.type,reimbInfo.dateResolved,reimbInfo.dateSubmitted,
             reimbInfo.reimbursementId]);
             if (!patchedReimb.rows[0].id) { // Couldn't modify reimbursement
