@@ -3,8 +3,7 @@
  * Contains initial setup such as modules to use, port declaration, 
  * server initialization. 
  * Modules:
- * @express Module used to create the communication with the server in order
- * to send/receive requests/responses.
+ * @express Module used to create the REST API.
  * @bodyParser Module used to convert a request body of type json to a JS 
  * object. 
  * Also import routers from corresponding files.
