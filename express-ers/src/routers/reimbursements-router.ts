@@ -43,7 +43,7 @@ reimbRouter.get('/author/:authorId', async (request:any,response:Response) => {
 // Method to create a new reimbursement
 reimbRouter.post('',async (request:any,response:Response) => {
     // Retrieve information from the request body
-    const reimbInfo = request.body;
+    const reimbInfo:Reimbursement = request.body;
     // Retrieve current user role
     const roleId : number = parseInt(request.token.role);
     const newReimbursement = await reimbService.createNewReimbursement(reimbInfo,roleId);
