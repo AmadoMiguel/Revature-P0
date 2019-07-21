@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, 
+    initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ERS</title>
+    <!-- Styles document -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!---------------------Main title of the page------------------------------>
+    <header id="main-title-container">
+        <h1>Expense Reimbursement System</h1>
+    </header>
+    <!-----------------------------Login menu---------------------------------->
+    <div class="login-container" id="login-container">
+        <header>
+            <h2 class="login-title">ERS login</h2>
+        </header>
+        <div class="form-container">
+                <form action="" class="login-form" id="login-form" method="POST">
+                    <label for="username">Username:</label>
+                    <input type="text" name=""  id="username" class="login-credentials" 
+                    value="pereztony"> 
+                    <label for="password">Password:</label>
+                    <input type="password"  name="" id="password" class="login-credentials"
+                    value="piano56"> 
+                </form>
+                <button id="login-button">Login</button>
+                <br>
+        </div>
+    </div>
+    <!-- In case user doesn't login, this will pop up -->
+    <p id="not-login"></p>
+
+    <!------------------------ERS menu (three panel)--------------------------->
+    <!-- Navigator container -->
+    <div class="ers-menu" id="nav-content-container">
+        <!-- Navigator -->
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-items">User Info</li>
+                <li class="nav-items">Users</li>
+                <li class="nav-items">Reimbursements</li>
+            </ul>
+        </nav>
+        <!-- Content -->
+        <div id="content-area">
+
+        </div>
+    </div>
+
+    <!-- Show users information -->
+    
+
+    <!-- Script to be executed -->
+    <script src="script.js"></script>
+</body>
+</html>

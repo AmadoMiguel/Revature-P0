@@ -21,10 +21,14 @@ var login_router_1 = require("./routers/login-router");
 var reimbursements_router_1 = require("./routers/reimbursements-router");
 var expApp = express_1();
 var port = 3006;
+// MIDDLEWARE usage
 // Convert to javascript object
 expApp.use(body_parser_1.json());
-// MIDDLEWARE
-expApp.use(function (request, response, next) {
+expApp.use(body_parser_1.urlencoded({ extended: true }));
+// Allow corse fos http request from html page
+expApp.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 // Define the routers
