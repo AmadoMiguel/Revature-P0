@@ -55,14 +55,14 @@ usersRouter.get('', function (request, response) { return __awaiter(_this, void 
                 allUsers = _a.sent();
                 if (allUsers) { // Access accepted
                     if (allUsers.length === 0) { // No users registered yet
-                        response.sendStatus(404);
+                        response.json({status:404});
                     }
                     else {
-                        response.status(200).json(allUsers); // Shows all users
+                        response.json({info:allUsers,status:200}); // Shows all users
                     }
                 }
                 else {
-                    response.sendStatus(403); // Access forbidden
+                    response.json({status:403}); // Access forbidden
                 }
                 return [2 /*return*/];
         }
@@ -80,14 +80,14 @@ usersRouter.get('/:id', function (request, response) { return __awaiter(_this, v
                 user = _a.sent();
                 if (user) { // Access accepted
                     if (user.length === 0) { // No users found with given id
-                        response.sendStatus(404);
+                        response.json({status:404});
                     }
                     else {
-                        response.status(200).json(user); // Shows user with given id
+                        response.json({info:user,status:200}); // Shows user with given id
                     }
                 }
                 else {
-                    response.sendStatus(403); // Access forbidden
+                    response.json({status:403}); // Access forbidden
                 }
                 return [2 /*return*/];
         }
@@ -106,14 +106,14 @@ usersRouter.patch('', function (request, response) { return __awaiter(_this, voi
                 patchedUser = _a.sent();
                 if (patchedUser) { // Access accepted
                     if (patchedUser.length === 0) { // Could not find user with id provided in the request body
-                        response.sendStatus(404);
+                        response.json({status:404});
                     }
                     else {
-                        response.status(200).json(patchedUser); // Shows modified info from user
+                        response.json({info:patchedUser,status:200}); // Shows modified info from user
                     }
                 }
                 else {
-                    response.sendStatus(403); // Access forbidden
+                    response.json({status:403}); // Access forbidden
                 }
                 return [2 /*return*/];
         }

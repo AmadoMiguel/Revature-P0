@@ -12,6 +12,7 @@
 exports.__esModule = true;
 var express_1 = require("express");
 var body_parser_1 = require("body-parser");
+var cors_1 = require("cors");
 // This middleware is used to store the token of the person that logs in in order
 // to check if has accesss to next routers
 var check_token_1 = require("./util/check-token");
@@ -26,11 +27,7 @@ var port = 3006;
 expApp.use(body_parser_1.json());
 expApp.use(body_parser_1.urlencoded({ extended: true }));
 // Allow corse fos http request from html page
-expApp.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+expApp.use(cors_1());
 // Define the routers
 // The first router is the login.
 // Login router

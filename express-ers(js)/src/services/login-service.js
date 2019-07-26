@@ -59,7 +59,7 @@ function userLogin(usr, pass) {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, DB_cred_1["default"].query("select \"userId\",\"firstName\",\n            \"lastName\",\"email\",\"roleId\",public.roles.role_name as role from public.userinfo\n            join public.roles on public.userinfo.\"roleId\" = public.roles.roleid \n            where username=$1 and password=$2;", [usr, pass])];
+                    return [4 /*yield*/, DB_cred_1["default"].query("select \"userId\",\"firstName\",\"username\",\n            \"lastName\",\"email\",\"roleId\",public.roles.role_name as role from public.userinfo\n            join public.roles on public.userinfo.\"roleId\" = public.roles.roleid \n            where username=$1 and password=$2;", [usr, pass])];
                 case 2:
                     userInfo = _a.sent();
                     return [2 /*return*/, userInfo.rows[0]];

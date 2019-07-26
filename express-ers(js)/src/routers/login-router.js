@@ -61,12 +61,16 @@ loginRouter.post('', function (request, response) { return __awaiter(_this, void
                     token = loginService.setTokenWithUserInfo(loginResult);
                     // ...and send it to the client so he/her can send it back to idendify her/himself
                     // and let the server know if she/he has access to other routers.
-                    response.status(201).json([loginResult, token]);
+                    response.json({
+                        info:[loginResult, token],
+                        status:201
+                    });
                 }
                 // No user found with given credentials 
                 else {
-                    response.status(400).json({
-                        message: 'Invalid credentials'
+                    response.json({
+                        message: 'Invalid credentials',
+                        status:400
                     });
                 }
                 return [2 /*return*/];

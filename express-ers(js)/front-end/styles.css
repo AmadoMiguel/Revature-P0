@@ -140,6 +140,13 @@ nav > ul > li:active {
     transition: 50ms;
 }
 
+#logout-button:hover {
+    background: lightcoral;
+}
+#logout-button:active {
+    background: white;
+}
+
 #content-area {
     background-color: lightcyan;
     height: 10px;
