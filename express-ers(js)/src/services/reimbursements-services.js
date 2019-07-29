@@ -47,7 +47,7 @@ function getReimbByStatusId(id, roleId) {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, DB_cred_1["default"].query("select * \n            from public.\"Reimbursement\" where status = $1", [id])];
+                    return [4 /*yield*/, DB_cred_1["default"].query("select id,users.\"firstName\",amount,datesubmitted,dateresolved,description,resolver,reimbstatus.status,reimbtype.type\n  from public.\"Reimbursement\" as reimb \n join public.userinfo as users on reimb.author=users.\"userId\" join public.\"ReimbursementStatus\" as reimbstatus on reimb.status=reimbstatus.\"statusId\" \n join public.\"ReimbursementType\" as reimbtype on reimb.type=reimbtype.\"typeId\"   \n where reimb.status = $1 order by id", [id])];
                 case 2:
                     result = _a.sent();
                     if (result.rowcount === 0) { // Reimbursements not found with given statusId
@@ -80,7 +80,7 @@ function getReimbByAuthorId(id, roleId) {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, DB_cred_1["default"].query("select * \n            from public.\"Reimbursement\" where author = $1", [id])];
+                    return [4 /*yield*/, DB_cred_1["default"].query("select id,author,amount,datesubmitted,dateresolved,description,resolver,reimbstatus.status,reimbtype.type\n  from public.\"Reimbursement\" as reimb \n join public.\"ReimbursementStatus\" as reimbstatus on reimb.status=reimbstatus.\"statusId\" \n join public.\"ReimbursementType\" as reimbtype on reimb.type=reimbtype.\"typeId\"   \n where author = $1 order by id", [id])];
                 case 2:
                     result = _a.sent();
                     if (result.rowcount === 0) { // Reimbursements not found with given authorId
@@ -148,7 +148,7 @@ function modifyReimbursement(reimbInfo, resolvId, roleId) {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, DB_cred_1["default"].query("update public.\"Reimbursement\"\n            set author=coalesce($1,author),amount=coalesce($2,amount),\n            description=coalesce($3,description),resolver=coalesce($4,resolver),\n            status=coalesce($5,status),type=coalesce($6,type),\n            dateresolved=coalesce($7,dateresolved),datesubmitted=coalesce($8,datesubmitted)\n            where id=$9 \n            returning id,author,amount,description,resolver,status,type,dateresolved,datesubmitted", [reimbInfo.author, reimbInfo.amount, reimbInfo.description, resolvId,
+                    return [4 /*yield*/, DB_cred_1["default"].query("update public.\"Reimbursement\"\n            set author=coalesce($1,author),amount=coalesce($2,amount),\n            description=coalesce($3,description),resolver=coalesce($4,resolver),\n            status=coalesce($5,status),type=coalesce($6,type),\n            dateresolved=coalesce($7,dateresolved),datesubmitted=coalesce($8,datesubmitted)\n where id=$9 \n  returning id,author,amount,description,resolver,status,type,dateresolved,datesubmitted", [reimbInfo.author, reimbInfo.amount, reimbInfo.description, resolvId,
                             reimbInfo.status, reimbInfo.type, reimbInfo.dateResolved, reimbInfo.dateSubmitted,
                             reimbInfo.reimbursementId])];
                 case 2:

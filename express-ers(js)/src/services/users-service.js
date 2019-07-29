@@ -47,7 +47,7 @@ function getAllUsers(roleId) {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, DB_cred_1["default"].query("select \"userId\",\"firstName\", \"lastName\",email,username, \n            public.roles.role_name as role from public.userinfo \n            join public.roles \n            on public.userinfo.\"roleId\" = public.roles.roleid")];
+                    return [4 /*yield*/, DB_cred_1["default"].query("select \"userId\",\"firstName\", \"lastName\",email,username, \n            public.roles.role_name as role from public.userinfo \n            join public.roles \n            on public.userinfo.\"roleId\" = public.roles.roleid order by \"userId\" ")];
                 case 2:
                     allUsers = _a.sent();
                     if (allUsers.rowCount === 0) { // Data not found

@@ -53,14 +53,14 @@ reimbRouter.get('/status/:statusId', function (request, response) { return __awa
                 reimbursements = _a.sent();
                 if (reimbursements) { // Access accepted
                     if (reimbursements.length === 0) { // No reimbursements found with provided statusId
-                        response.sendStatus(404);
+                        response.json({status:404});
                     }
                     else {
-                        response.status(200).json(reimbursements); // Show found reimbursements
+                        response.json({info:reimbursements,status:200}); // Show found reimbursements
                     }
                 }
                 else {
-                    response.sendStatus(403); // Access forbidden
+                    response.json({status:403}); // Access forbidden
                 }
                 return [2 /*return*/];
         }
@@ -80,14 +80,14 @@ reimbRouter.get('/author/:authorId', function (request, response) { return __awa
                 // If any reimbursement(s) found with that authorId
                 if (reimbursements) { // Access accepted
                     if (reimbursements.length === 0) { // No reimbursements found with provided statusId
-                        response.sendStatus(404);
+                        response.json({status:404});
                     }
                     else {
-                        response.status(200).json(reimbursements); // Show found reimbursements
+                        response.json({info:reimbursements,status:200}); // Show found reimbursements
                     }
                 }
                 else {
-                    response.sendStatus(403); // Access forbidden
+                    response.json({status:403}); // Access forbidden
                 }
                 return [2 /*return*/];
         }
@@ -95,26 +95,32 @@ reimbRouter.get('/author/:authorId', function (request, response) { return __awa
 }); });
 // Method to create a new reimbursement
 reimbRouter.post('', function (request, response) { return __awaiter(_this, void 0, void 0, function () {
-    var reimbInfo, roleId, newReimbursement;
+    var reimbInfo, roleId, newReimbursement,userId;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 reimbInfo = request.body;
-                console.log(reimbInfo);
+                // Access token encrypted info
                 roleId = parseInt(request.token.role);
+                userId = parseInt(request.token.id);
+                // Let the current user be the new reimbursement author
+                reimbInfo.author = userId;
+                reimbInfo.resolver = null;
+                reimbInfo.status = 1;
+                reimbInfo.dateResolved=null;
                 return [4 /*yield*/, reimbService.createNewReimbursement(reimbInfo, roleId)];
             case 1:
                 newReimbursement = _a.sent();
                 if (newReimbursement) { // Access accepted
                     if (newReimbursement.length === 0) {
-                        response.sendStatus(400); // Could not create
+                        response.json({status:406}); // Could not create
                     }
                     else { // Create new reimbursement
-                        response.status(201).json(newReimbursement);
+                        response.json({status:201});
                     }
                 }
                 else {
-                    response.sendStatus(403); // Access forbidden
+                    response.json({status:403}); // Access forbidden
                 }
                 return [2 /*return*/];
         }
