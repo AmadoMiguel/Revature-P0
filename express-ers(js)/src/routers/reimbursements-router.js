@@ -135,19 +135,23 @@ reimbRouter.patch('', function (request, response) { return __awaiter(_this, voi
                 reimbInfo = request.body;
                 currUser = parseInt(request.token.id);
                 roleId = parseInt(request.token.role);
+                reimbInfo.author = null;
+                reimbInfo.amount = null;
+                reimbInfo.type = null;
+                reimbInfo.dateSubmitted=null;
                 return [4 /*yield*/, reimbService.modifyReimbursement(reimbInfo, currUser, roleId)];
             case 1:
                 modifiedReimb = _a.sent();
                 if (modifiedReimb) { // Access accepted
                     if (modifiedReimb.length === 0) {
-                        response.sendStatus(400); // Could not create
+                        response.json({json:400}); // Could not create
                     }
                     else { // Create new reimbursement
-                        response.status(201).json(modifiedReimb);
+                        response.json({info:modifiedReimb,status:201});
                     }
                 }
                 else {
-                    response.sendStatus(403); // Access forbidden
+                    response.json({status:403}); // Access forbidden
                 }
                 return [2 /*return*/];
         }
