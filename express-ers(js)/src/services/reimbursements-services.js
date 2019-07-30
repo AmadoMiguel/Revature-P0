@@ -103,14 +103,14 @@ function getReimbByAuthorId(id, roleId) {
 }
 exports.getReimbByAuthorId = getReimbByAuthorId;
 // Function to create a new reimbursement
-function createNewReimbursement(reimbursement) {
+function createNewReimbursement(reimbursement,roleId) {
     return __awaiter(this, void 0, void 0, function () {
         var newReimbursement, err_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     // Everybody could create a new reimbursements
-                    if (true) return [3 /*break*/, 5];
+                    if (!((roleId === 2) || (roleId === 3) || (roleId === 4))) return [3 /*break*/, 5];
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);

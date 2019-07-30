@@ -73,7 +73,7 @@ reimbRouter.get('/author/:authorId', function (request, response) { return __awa
         switch (_a.label) {
             case 0:
                 authorId = parseInt(request.params.authorId);
-                userRole = parseInt(request.token.role);
+                userRole = 2;
                 return [4 /*yield*/, reimbService.getReimbByAuthorId(authorId, userRole)];
             case 1:
                 reimbursements = _a.sent();
@@ -95,20 +95,20 @@ reimbRouter.get('/author/:authorId', function (request, response) { return __awa
 }); });
 // Method to create a new reimbursement
 reimbRouter.post('', function (request, response) { return __awaiter(_this, void 0, void 0, function () {
-    var reimbInfo, newReimbursement,userId;
+    var reimbInfo,roleId,newReimbursement,userId;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 reimbInfo = request.body;
                 // Access token encrypted info
-                // roleId = parseInt(request.token.role);
+                roleId = 2;
                 userId = parseInt(request.token.id);
                 // Let the current user be the new reimbursement author
                 reimbInfo.author = userId;
                 reimbInfo.resolver = null;
                 reimbInfo.status = 1;
                 reimbInfo.dateResolved=null;
-                return [4 /*yield*/, reimbService.createNewReimbursement(reimbInfo)];
+                return [4 /*yield*/, reimbService.createNewReimbursement(reimbInfo,roleId)];
             case 1:
                 newReimbursement = _a.sent();
                 if (newReimbursement) { // Access accepted
@@ -135,6 +135,7 @@ reimbRouter.patch('', function (request, response) { return __awaiter(_this, voi
                 reimbInfo = request.body;
                 currUser = parseInt(request.token.id);
                 roleId = parseInt(request.token.role);
+                reimbInfo.description = null;
                 reimbInfo.author = null;
                 reimbInfo.amount = null;
                 reimbInfo.type = null;
