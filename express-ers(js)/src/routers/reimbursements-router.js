@@ -95,20 +95,20 @@ reimbRouter.get('/author/:authorId', function (request, response) { return __awa
 }); });
 // Method to create a new reimbursement
 reimbRouter.post('', function (request, response) { return __awaiter(_this, void 0, void 0, function () {
-    var reimbInfo, roleId, newReimbursement,userId;
+    var reimbInfo, newReimbursement,userId;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 reimbInfo = request.body;
                 // Access token encrypted info
-                roleId = parseInt(request.token.role);
+                // roleId = parseInt(request.token.role);
                 userId = parseInt(request.token.id);
                 // Let the current user be the new reimbursement author
                 reimbInfo.author = userId;
                 reimbInfo.resolver = null;
                 reimbInfo.status = 1;
                 reimbInfo.dateResolved=null;
-                return [4 /*yield*/, reimbService.createNewReimbursement(reimbInfo, roleId)];
+                return [4 /*yield*/, reimbService.createNewReimbursement(reimbInfo)];
             case 1:
                 newReimbursement = _a.sent();
                 if (newReimbursement) { // Access accepted
